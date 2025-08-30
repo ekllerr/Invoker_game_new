@@ -1,4 +1,5 @@
 import {create} from "zustand";
+import type {SPELLS} from "../Constants/spells.ts";
 
 interface IUseGameStore{
     orbBindings: {
@@ -8,6 +9,16 @@ interface IUseGameStore{
     },
 
     invokeBind: string,
+
+    castedSpellsBindings: {
+        castedSpellBind1: string,
+        castedSpellBind2: string
+    },
+
+    castedSpells: {
+        castedSpell1: SPELLS,
+        castedSpell2: SPELLS,
+    }
 
     currentCombo: string[],
 
@@ -21,7 +32,18 @@ const useGameStore = create<IUseGameStore>(set => ({
         'exort': 'e'
     },
 
+    castedSpellsBindings: {
+        castedSpellBind1: 'd',
+        castedSpellBind2: 'f',
+    },
+
+    castedSpells: {
+        castedSpell1: 'noSpell',
+        castedSpell2: 'noSpell',
+    },
+
     invokeBind: 'r',
+
 
     currentCombo: ['', '', ''],
 

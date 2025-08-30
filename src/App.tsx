@@ -19,9 +19,9 @@ function App() {
 
         }
 
-        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keypress', handleKeyDown);
 
-        return () => window.removeEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keypress', handleKeyDown);
 
     })
 
