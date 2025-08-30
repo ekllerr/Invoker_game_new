@@ -2,13 +2,19 @@ import GameContainer from "./components/GameContainer.tsx";
 import {useEffect} from "react";
 import useGameStore from "./store/gameStore.ts";
 
+
 function App() {
 
     useEffect(() => {
         const store = useGameStore.getState();
 
         const handleKeyDown = (e: KeyboardEvent) => {
+
             const key = e.key.toLowerCase();
+
+            if(key === store.invokeBind){
+                store.invoke();
+            }
 
             const orbEntry = Object.entries(store.orbBindings).find(([, bindKey]) => bindKey === key);
 

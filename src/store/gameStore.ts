@@ -1,5 +1,8 @@
 import {create} from "zustand";
-import type {SPELLS} from "../Constants/spells.ts";
+import type {SPELL} from "../Constants/SPELL.ts";
+import {SPELL_TO_ORBS} from "../Constants/spellToOrbs.ts";
+
+type OrbsCombo = [string, string, string];
 
 interface IUseGameStore{
     orbBindings: {
@@ -16,13 +19,15 @@ interface IUseGameStore{
     },
 
     castedSpells: {
-        castedSpell1: SPELLS,
-        castedSpell2: SPELLS,
+        castedSpell1: SPELL,
+        castedSpell2: SPELL,
     }
 
-    currentCombo: string[],
+    currentCombo: OrbsCombo,
 
     addOrbToCombo: (orb: string) => void,
+
+    invoke: () => void,
 }
 
 const useGameStore = create<IUseGameStore>(set => ({
@@ -47,7 +52,23 @@ const useGameStore = create<IUseGameStore>(set => ({
 
     currentCombo: ['', '', ''],
 
-    addOrbToCombo: (orb) => set(state => ({currentCombo: [...state.currentCombo.slice(1), orb]})),
+    addOrbToCombo: (orb: string) => set(state => ({currentCombo: [...state.currentCombo.slice(1), orb] as OrbsCombo})),
+
+    invoke: () => {
+        set(state => {
+            const spellEntries = Object.entries(SPELL_TO_ORBS)
+
+            const castedSpellEntry = spellEntries.find(([, orbsCombos]) => (orbsCombos.some(combo => (combo.join(',') === state.currentCombo.join(',')))));
+
+            const castedSpell: SPELL = castedSpellEntry ? castedSpellEntry[0] as SPELL : 'noSpell';
+
+            return state.castedSpells.castedSpell1 === 'noSpell' ?
+                {castedSpells: {castedSpell1: castedSpell, castedSpell2: 'noSpell'}}
+            :
+                {castedSpells: {castedSpell1: castedSpell, castedSpell2: state.castedSpells.castedSpell1}}
+
+        })
+    }
 }))
 
 export default useGameStore;

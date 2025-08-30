@@ -6,6 +6,7 @@ export interface ISpellType{
     tornado: string,
     alacrity: string,
     sunStrike: string,
+    forgeSpirit: string,
     chaosMeteor: string,
     deafeningBlast: string,
     noSpell: string
@@ -24,7 +25,7 @@ export interface ISpellType{
     noSpell: 'noSpell'
 } as const;*/
 
-export type SPELLS =
+export type SPELL =
     'coldSnap'|
     'ghostWalk'|
     'iceWall'|
@@ -32,6 +33,7 @@ export type SPELLS =
     'tornado'|
     'alacrity'|
     'sunStrike'|
+    'forgeSpirit'|
     'chaosMeteor'|
     'deafeningBlast'|
     'noSpell'

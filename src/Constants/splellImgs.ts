@@ -5,10 +5,11 @@ import emp from "@/assets/spells/invoker_emp.png";
 import tornado from "@/assets/spells/invoker_tornado.png";
 import alacrity from "@/assets/spells/invoker_alacrity.png";
 import sunStrike from "@/assets/spells/invoker_sun_strike.png";
+import forgeSpirit from "@/assets/spells/invoker_forge_spirit.png";
 import chaosMeteor from "@/assets/spells/invoker_chaos_meteor.png";
 import deafeningBlast from "@/assets/spells/invoker_deafening_blast.png";
 import noSpell from "@/assets/spells/no_spell.png";
-import type {ISpellType} from "./spells.ts";
+import type {ISpellType} from "./SPELL.ts";
 
 export const SPELL_IMG: ISpellType = {
     coldSnap: coldSnap,
@@ -18,6 +19,7 @@ export const SPELL_IMG: ISpellType = {
     tornado: tornado,
     alacrity: alacrity,
     sunStrike: sunStrike,
+    forgeSpirit: forgeSpirit,
     chaosMeteor: chaosMeteor,
     deafeningBlast: deafeningBlast,
     noSpell: noSpell
