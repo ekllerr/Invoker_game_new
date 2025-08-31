@@ -87,8 +87,8 @@ const useGameStore = create<IUseGameStore>(set => ({
 
             const castedSpell: SPELL = castedSpellEntry ? castedSpellEntry[0] as SPELL : 'noSpell';
 
-            return state.castedSpells.castedSpell1 === 'noSpell' ?
-                {castedSpells: {castedSpell1: castedSpell, castedSpell2: 'noSpell'}}
+            return state.castedSpells.castedSpell1 === 'noSpell' || state.castedSpells.castedSpell1 === castedSpell ?
+                {castedSpells: {castedSpell1: castedSpell, castedSpell2: state.castedSpells.castedSpell2}}
             :
                 {castedSpells: {castedSpell1: castedSpell, castedSpell2: state.castedSpells.castedSpell1}}
 
