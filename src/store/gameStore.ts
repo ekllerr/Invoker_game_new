@@ -1,10 +1,17 @@
 import {create} from "zustand";
-import type {SPELL} from "../Constants/SPELL.ts";
-import {SPELL_TO_ORBS} from "../Constants/spellToOrbs.ts";
+import type {SPELL} from "@/сonstants/spell.ts";
+import {SPELL_TO_ORBS} from "@/сonstants/spellToOrbs.ts";
 
 type OrbsCombo = [string, string, string];
 
 interface IUseGameStore{
+
+    startGame: () => void,
+
+    endGame: () => void,
+
+    gameRunning: boolean,
+
     orbBindingKeys: {
         'quas': string,
         'wex': string,
@@ -44,6 +51,24 @@ interface IUseGameStore{
 }
 
 const useGameStore = create<IUseGameStore>(set => ({
+
+    startGame: () => set(state => {
+        if(state.gameRunning){
+            throw new Error('Game is already started');
+        }
+        return {gameRunning: true};
+    }),
+
+    endGame: () => set(state => {
+       if(!state.gameRunning){
+           throw new Error("Game isn't running");
+       }
+
+       return {gameRunning: false, currentCombo: ['','',''], castedSpells: {castedSpell1: 'noSpell', castedSpell2: 'noSpell'}};
+    }),
+
+    gameRunning: false,
+
     orbBindingKeys: {
         'quas': 'q',
         'wex': 'w',

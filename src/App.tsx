@@ -1,16 +1,26 @@
-import GameContainer from "./components/GameContainer.tsx";
+import GameContainer from "@/components/GameContainer.tsx";
 import {useEffect} from "react";
-import useGameStore from "./store/gameStore.ts";
+import useGameStore from "@/store/gameStore.ts";
 
 
 function App() {
 
+    const gameRunning= useGameStore(state => state.gameRunning);
     useEffect(() => {
         const store = useGameStore.getState();
+
 
         const handleKeyDown = (e: KeyboardEvent) => {
 
             const code = e.code;
+
+            if(code === 'Enter'){
+                if(gameRunning) store.endGame();
+                else store.startGame();
+            }
+
+            if(!gameRunning) return;
+
 
             if(code === store.invokeBindCode){
                 store.invoke();

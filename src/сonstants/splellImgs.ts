@@ -9,7 +9,7 @@ import forgeSpirit from "@/assets/spells/invoker_forge_spirit.png";
 import chaosMeteor from "@/assets/spells/invoker_chaos_meteor.png";
 import deafeningBlast from "@/assets/spells/invoker_deafening_blast.png";
 import noSpell from "@/assets/spells/no_spell.png";
-import type {ISpellType} from "./SPELL.ts";
+import type {ISpellType} from "@/сonstants/spell.ts";
 
 export const SPELL_IMG: ISpellType = {
     coldSnap: coldSnap,

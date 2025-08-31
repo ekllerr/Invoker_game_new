@@ -1,6 +1,6 @@
-import {ORBS_IMGS} from "../Constants/orbsImgs.ts";
-import Orb from "./Orb.tsx";
-import useGameStore from "../store/gameStore.ts";
+import {ORBS_IMGS} from "@/сonstants/orbsImgs.ts";
+import Orb from "@/components/Orb.tsx";
+import useGameStore from "@/store/gameStore.ts";
 
 const OrbsContainer = () => {
     const currentCombo = useGameStore(state => state.currentCombo);

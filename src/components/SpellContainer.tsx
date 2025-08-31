@@ -1,8 +1,8 @@
 import Spell from "./Spell.tsx";
-import {ORBS_IMGS} from "../Constants/orbsImgs.ts";
+import {ORBS_IMGS} from "@/сonstants/orbsImgs.ts";
 import invoke from '@/assets/spells/invoker_invoke.png';
-import useGameStore from "../store/gameStore.ts";
-import {SPELL_IMG} from "../Constants/splellImgs.ts";
+import useGameStore from "@/store/gameStore.ts";
+import {SPELL_IMG} from "@/сonstants/splellImgs.ts";
 
 
 const SpellContainer = () => {
