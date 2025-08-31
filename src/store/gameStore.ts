@@ -5,15 +5,28 @@ import {SPELL_TO_ORBS} from "../Constants/spellToOrbs.ts";
 type OrbsCombo = [string, string, string];
 
 interface IUseGameStore{
-    orbBindings: {
+    orbBindingKeys: {
         'quas': string,
         'wex': string,
         'exort': string
     },
 
-    invokeBind: string,
+    orbBindingCodes: {
+        'quas': string,
+        'wex': string,
+        'exort': string
+    },
 
-    castedSpellsBindings: {
+    invokeBindKey: string,
+
+    invokeBindCode: string,
+
+    castedSpellsBindingKeys: {
+        castedSpellBind1: string,
+        castedSpellBind2: string
+    },
+
+    castedSpellsBindingCodes: {
         castedSpellBind1: string,
         castedSpellBind2: string
     },
@@ -31,24 +44,36 @@ interface IUseGameStore{
 }
 
 const useGameStore = create<IUseGameStore>(set => ({
-    orbBindings: {
+    orbBindingKeys: {
         'quas': 'q',
         'wex': 'w',
         'exort': 'e'
     },
 
-    castedSpellsBindings: {
+    orbBindingCodes: {
+        'quas': 'KeyQ',
+        'wex': 'KeyW',
+        'exort': 'KeyE'
+    },
+
+    castedSpellsBindingKeys: {
         castedSpellBind1: 'd',
         castedSpellBind2: 'f',
     },
+
+    castedSpellsBindingCodes: {
+        castedSpellBind1: 'KeyD',
+        castedSpellBind2: 'KeyF',
+    },
+
+    invokeBindKey: 'r',
+
+    invokeBindCode: 'KeyR',
 
     castedSpells: {
         castedSpell1: 'noSpell',
         castedSpell2: 'noSpell',
     },
-
-    invokeBind: 'r',
-
 
     currentCombo: ['', '', ''],
 

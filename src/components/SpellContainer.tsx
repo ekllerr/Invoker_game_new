@@ -6,10 +6,10 @@ import {SPELL_IMG} from "../Constants/splellImgs.ts";
 
 
 const SpellContainer = () => {
-    const orbsBindings = useGameStore(state => state.orbBindings);
+    const orbsBindings = useGameStore(state => state.orbBindingKeys);
     const castedSpells = useGameStore(state => state.castedSpells);
-    const castedSpellsBindings = useGameStore(state => state.castedSpellsBindings);
-    const invokeBind = useGameStore(state => state.invokeBind);
+    const castedSpellsBindings = useGameStore(state => state.castedSpellsBindingKeys);
+    const invokeBind = useGameStore(state => state.invokeBindKey);
 
 
     return (

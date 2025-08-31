@@ -1,17 +1,3 @@
-import type {SPELL} from "./SPELL.ts";
-
-/*interface ISpellToOrbs{
-    coldSnap: Spell & [string[]],
-    ghostWalk: Spell & [string[]],
-    iceWall: Spell & [string[]],
-    emp: Spell & [string[]],
-    tornado: Spell & [string[]],
-    alacrity: Spell & [string[]],
-    sunStrike: Spell & [string[]],
-    forgeSpirit: Spell & [string[]],
-    chaosMeteor: Spell & [string[]],
-    deafeningBlast: Spell & [string[]],
-}*/
 
 export const SPELL_TO_ORBS = {
     'coldSnap': [

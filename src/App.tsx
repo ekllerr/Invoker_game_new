@@ -10,13 +10,13 @@ function App() {
 
         const handleKeyDown = (e: KeyboardEvent) => {
 
-            const key = e.key.toLowerCase();
+            const code = e.code;
 
-            if(key === store.invokeBind){
+            if(code === store.invokeBindCode){
                 store.invoke();
             }
 
-            const orbEntry = Object.entries(store.orbBindings).find(([, bindKey]) => bindKey === key);
+            const orbEntry = Object.entries(store.orbBindingCodes).find(([, bindCode]) => bindCode === code);
 
             if (orbEntry) {
                 const [orbName] = orbEntry;
