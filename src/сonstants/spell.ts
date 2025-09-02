@@ -9,7 +9,7 @@ export interface ISpellType{
     forgeSpirit: string,
     chaosMeteor: string,
     deafeningBlast: string,
-    noSpell: string
+    noSpell?: string
 }
 
 export type SPELL =
@@ -26,4 +26,15 @@ export type SPELL =
     'noSpell'
 ;
 
-// export type SPELLS = typeof SPELLS[keyof typeof SPELLS];/
+export const SPELL_NAME: ISpellType = {
+    coldSnap: 'Cold Snap',
+    ghostWalk: 'Ghost Walk',
+    iceWall: 'Ice Wall',
+    emp: 'EMP',
+    tornado: 'Tornado',
+    alacrity: 'Alacrity',
+    sunStrike: 'Sun Strike',
+    forgeSpirit: 'Forge Spirit',
+    chaosMeteor: 'Chaos Meteor',
+    deafeningBlast: 'Deafening Blast',
+}
