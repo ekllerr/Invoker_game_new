@@ -10,6 +10,8 @@ interface IUseGameStore{
 
     endGame: () => void,
 
+    gameFinished: boolean,
+
     gameRunning: boolean,
 
     orbBindingKeys: {
@@ -53,6 +55,8 @@ interface IUseGameStore{
 
     generateRandomSpell: () => void,
 
+    castedRandomSpells: SPELL[],
+
 }
 
 const useGameStore = create<IUseGameStore>(set => ({
@@ -73,6 +77,8 @@ const useGameStore = create<IUseGameStore>(set => ({
     }),
 
     gameRunning: false,
+
+    gameFinished: false,
 
     orbBindingKeys: {
         'quas': 'q',
@@ -129,17 +135,27 @@ const useGameStore = create<IUseGameStore>(set => ({
         })
     },
 
-    randomSpell: 'coldSnap',
+    randomSpell: 'noSpell',
+
+    castedRandomSpells: [],
 
     generateRandomSpell: () => {set(state => {
         let spell: SPELL;
 
         const spells = Object.keys(SPELL_NAME);
 
+        if(state.castedRandomSpells.length === spells.length){
+            console.log('All spells casted');
+            return{gameRunning: false, gameFinished: true};
+        }
+
         do{
             spell = spells[Math.floor(Math.random() * spells.length)] as unknown as SPELL;
-        } while(spell === state.castedSpells.castedSpell2);
+        } while(state.castedRandomSpells.includes(spell));
 
+        console.log(state.castedRandomSpells);
+
+        state.castedRandomSpells.push(spell);
         return{randomSpell: spell}
     })},
 }))

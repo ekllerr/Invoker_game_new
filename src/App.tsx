@@ -16,7 +16,10 @@ function App() {
 
             if(code === 'Enter'){
                 if(gameRunning) store.endGame();
-                else store.startGame();
+                else{
+                    store.startGame();
+                    store.generateRandomSpell();
+                }
             }
 
             if(!gameRunning) return;
