@@ -25,7 +25,7 @@ const GameContainer = () => {
             }
             {
                 gameRunning ?
-                    <div className="flex flex-col items-center justify-center space-y-8">
+                    <div className="flex flex-col items-center justify-center space-y-12">
                         <OrbsContainer/>
                         <button className="w-40 h-13 cursor-pointer text-xl border-1 border-transparent rounded-xl shadow-2xl shadow-white hover:border-white hover:shadow-lg transition-all duration-300" onClick={() => endGame()}>Restart Game</button>
                     </div>

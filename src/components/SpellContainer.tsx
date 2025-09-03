@@ -21,8 +21,8 @@ const SpellContainer = () => {
                 ))
             }
 
-            <li><Spell spellImg={SPELL_IMG[castedSpells['castedSpell1']]} keyBind={castedSpellsBindings['castedSpellBind1']}/></li>
-            <li><Spell spellImg={SPELL_IMG[castedSpells['castedSpell2']]} keyBind={castedSpellsBindings['castedSpellBind2']}/></li>
+            <li><Spell spellImg={SPELL_IMG[castedSpells['castedSpell1']] as string} keyBind={castedSpellsBindings['castedSpellBind1']}/></li>
+            <li><Spell spellImg={SPELL_IMG[castedSpells['castedSpell2']] as string} keyBind={castedSpellsBindings['castedSpellBind2']}/></li>
 
             <li><Spell spellImg={invoke} keyBind={invokeBind}/></li>
         </ul>

@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import type {SPELL} from "@/сonstants/spell.ts";
+import {type SPELL, SPELL_NAME} from "@/сonstants/spell.ts";
 import {SPELL_TO_ORBS} from "@/сonstants/spellToOrbs.ts";
 
 type OrbsCombo = [string, string, string];
@@ -48,6 +48,11 @@ interface IUseGameStore{
     addOrbToCombo: (orb: string) => void,
 
     invoke: () => void,
+
+    randomSpell: SPELL,
+
+    generateRandomSpell: () => void,
+
 }
 
 const useGameStore = create<IUseGameStore>(set => ({
@@ -112,13 +117,31 @@ const useGameStore = create<IUseGameStore>(set => ({
 
             const castedSpell: SPELL = castedSpellEntry ? castedSpellEntry[0] as SPELL : 'noSpell';
 
+            if(castedSpell === state.randomSpell){
+                state.generateRandomSpell();
+            }
+
             return state.castedSpells.castedSpell1 === 'noSpell' || state.castedSpells.castedSpell1 === castedSpell ?
                 {castedSpells: {castedSpell1: castedSpell, castedSpell2: state.castedSpells.castedSpell2}}
             :
                 {castedSpells: {castedSpell1: castedSpell, castedSpell2: state.castedSpells.castedSpell1}}
 
         })
-    }
+    },
+
+    randomSpell: 'coldSnap',
+
+    generateRandomSpell: () => {set(state => {
+        let spell: SPELL;
+
+        const spells = Object.keys(SPELL_NAME);
+
+        do{
+            spell = spells[Math.floor(Math.random() * spells.length)] as unknown as SPELL;
+        } while(spell === state.castedSpells.castedSpell2);
+
+        return{randomSpell: spell}
+    })},
 }))
 
 export default useGameStore;

@@ -11,7 +11,7 @@ function App() {
 
 
         const handleKeyDown = (e: KeyboardEvent) => {
-
+            // console.log(e.key ,'pressed');
             const code = e.code;
 
             if(code === 'Enter'){
