@@ -12,6 +12,8 @@ interface IUseGameStore{
 
     gameFinished: boolean,
 
+    setGameFinished: (gameFinished: boolean) => void,
+
     gameRunning: boolean,
 
     orbBindingKeys: {
@@ -65,7 +67,8 @@ const useGameStore = create<IUseGameStore>(set => ({
         if(state.gameRunning){
             throw new Error('Game is already started');
         }
-        return {gameRunning: true};
+        state.generateRandomSpell();
+        return {gameRunning: true, gameFinished: false};
     }),
 
     endGame: () => set(state => {
@@ -73,12 +76,14 @@ const useGameStore = create<IUseGameStore>(set => ({
            throw new Error("Game isn't running");
        }
 
-       return {gameRunning: false, currentCombo: ['','',''], castedSpells: {castedSpell1: 'noSpell', castedSpell2: 'noSpell'}};
+       return {gameRunning: false, currentCombo: ['','',''], castedSpells: {castedSpell1: 'noSpell', castedSpell2: 'noSpell'}, randomSpell: 'noSpell', castedRandomSpells: []};
     }),
 
     gameRunning: false,
 
     gameFinished: false,
+
+    setGameFinished: (value) => set(() => ({gameFinished: value})),
 
     orbBindingKeys: {
         'quas': 'q',
@@ -145,15 +150,13 @@ const useGameStore = create<IUseGameStore>(set => ({
         const spells = Object.keys(SPELL_NAME);
 
         if(state.castedRandomSpells.length === spells.length){
-            console.log('All spells casted');
+            state.endGame();
             return{gameRunning: false, gameFinished: true};
         }
 
         do{
             spell = spells[Math.floor(Math.random() * spells.length)] as unknown as SPELL;
         } while(state.castedRandomSpells.includes(spell));
-
-        console.log(state.castedRandomSpells);
 
         state.castedRandomSpells.push(spell);
         return{randomSpell: spell}
