@@ -8,6 +8,7 @@ function App() {
 
     const gameRunning= useGameStore(state => state.gameRunning);
     const gameFinished = useGameStore(state => state.gameFinished);
+
     useEffect(() => {
         const store = useGameStore.getState();
 
@@ -43,7 +44,8 @@ function App() {
 
         return () => window.removeEventListener('keypress', handleKeyDown);
 
-    })
+    });
+
 
   return (
     <div className="flex flex-col items-center justify-center w-full">

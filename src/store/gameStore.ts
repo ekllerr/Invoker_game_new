@@ -1,6 +1,7 @@
 import {create} from "zustand";
 import {type SPELL, SPELL_NAME} from "@/сonstants/spell.ts";
 import {SPELL_TO_ORBS} from "@/сonstants/spellToOrbs.ts";
+import useTimerStore from "@/store/timerStore.ts";
 
 type OrbsCombo = [string, string, string];
 
@@ -59,7 +60,10 @@ interface IUseGameStore{
 
     castedRandomSpells: SPELL[],
 
+    record: number | null,
+    lastScore: number | null,
 }
+
 
 const useGameStore = create<IUseGameStore>(set => ({
 
@@ -67,7 +71,16 @@ const useGameStore = create<IUseGameStore>(set => ({
         if(state.gameRunning){
             throw new Error('Game is already started');
         }
+
+        const startTimer = useTimerStore.getState().start;
+
+        startTimer();
+
         state.generateRandomSpell();
+
+
+
+
         return {gameRunning: true, gameFinished: false};
     }),
 
@@ -75,6 +88,10 @@ const useGameStore = create<IUseGameStore>(set => ({
        if(!state.gameRunning){
            throw new Error("Game isn't running");
        }
+
+       const stopTimer = useTimerStore.getState().stop;
+
+       stopTimer();
 
        return {gameRunning: false, currentCombo: ['','',''], castedSpells: {castedSpell1: 'noSpell', castedSpell2: 'noSpell'}, randomSpell: 'noSpell', castedRandomSpells: []};
     }),
@@ -161,6 +178,9 @@ const useGameStore = create<IUseGameStore>(set => ({
         state.castedRandomSpells.push(spell);
         return{randomSpell: spell}
     })},
+
+    lastScore: null,
+    record: null,
 }))
 
 export default useGameStore;
