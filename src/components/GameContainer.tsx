@@ -3,54 +3,35 @@ import OrbsContainer from "@/components/OrbsContainer.tsx";
 import SpellContainer from "@/components/SpellContainer.tsx";
 import useGameStore from "@/store/gameStore.ts";
 import SpellToCast from "@/components/SpellToCast.tsx";
-import {useEffect, useRef, useState} from "react";
+import useTimerStore from "@/store/timerStore.ts";
+import {useEffect} from "react";
 
 
 const GameContainer = () => {
     const gameRunning = useGameStore(state => state.gameRunning);
+    const gameFinished = useGameStore(state => state.gameFinished);
     const startGame = useGameStore(state => state.startGame);
     const endGame = useGameStore(state => state.endGame);
 
-    const [seconds, setSeconds] = useState<number>(0);
-    const [tens, setTens] = useState<number>(0);
-    const [running, setRunning] = useState<boolean>(false);
+    const seconds = useTimerStore(state => state.seconds);
+    const tens = useTimerStore(state => state.tens);
 
-    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const startTimer = useTimerStore(state => state.start);
+    const stopTimer = useTimerStore(state => state.stop);
 
+    const record = useTimerStore(state => state.record);
+    const lastScore = useTimerStore(state => state.lastScore);
 
+    const allSpellsCasted = useGameStore(state => state.allSpellsCasted);
 
     useEffect(() => {
-        if(running){
-            timerRef.current = setInterval(() => {
-                setTens(prev => {
-                    if(prev === 99){
-                        setSeconds(prev => prev + 1);
-                        return 0;
-                    }
-
-                    return prev+1;
-                });
-            }, 10);
+        //TODO
+        if(allSpellsCasted) {
+            console.log(`record: ${record}, last score: ${lastScore}`);
         }else{
-            if(timerRef.current){
-                clearInterval(timerRef.current);
-                timerRef.current = null;
-            }
+            console.log(`Game was not finished, record: ${record}, last score: ${lastScore}`);
         }
-
-
-        return () => {
-            if(timerRef.current) clearInterval(timerRef.current)
-        };
-    },[running])
-
-    const startTimer = () => {
-        setRunning(true);
-        timerRef.current = null;
-        setTens(0);
-        setSeconds(0);
-    }
-    const stopTimer = () => setRunning(false);
+    }, [record, lastScore, gameFinished, allSpellsCasted]);
 
 
 

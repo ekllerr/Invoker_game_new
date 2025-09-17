@@ -17,6 +17,8 @@ interface IUseGameStore{
 
     gameRunning: boolean,
 
+    allSpellsCasted: boolean,
+
     orbBindingKeys: {
         'quas': string,
         'wex': string,
@@ -81,7 +83,7 @@ const useGameStore = create<IUseGameStore>(set => ({
 
 
 
-        return {gameRunning: true, gameFinished: false};
+        return {gameRunning: true, gameFinished: false, castedSpells: {castedSpell1: 'noSpell', castedSpell2: 'noSpell'}};
     }),
 
     endGame: () => set(state => {
@@ -99,6 +101,8 @@ const useGameStore = create<IUseGameStore>(set => ({
     gameRunning: false,
 
     gameFinished: false,
+
+    allSpellsCasted: false,
 
     setGameFinished: (value) => set(() => ({gameFinished: value})),
 
@@ -168,7 +172,7 @@ const useGameStore = create<IUseGameStore>(set => ({
 
         if(state.castedRandomSpells.length === spells.length){
             state.endGame();
-            return{gameRunning: false, gameFinished: true};
+            return{gameRunning: false, gameFinished: true, allSpellsCasted: true};
         }
 
         do{

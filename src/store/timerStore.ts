@@ -1,4 +1,5 @@
 import {create} from "zustand";
+import useGameStore from "@/store/gameStore.ts";
 
 interface IUseTimerStore{
     tens: number,
@@ -52,11 +53,14 @@ const useTimerStore = create<IUseTimerStore>((set, get) => ({
 
         const score = Number(`${get().seconds}.${get().tens}`)
 
+        const allSpellsCasted = useGameStore.getState().allSpellsCasted;
+        console.log(`all spells were casted: ${allSpellsCasted}`)
+
         set(state => {
-            if(state.record && state.record > score){
-                return {record: score, lastScore: score};
+            if((!state.record || state.record > score) &&  allSpellsCasted){
+                return {record: score, lastScore: score, seconds: 0, tens: 0};
             }
-            return {lastScore: score}
+            return {lastScore: score, seconds: 0, tens: 0}
         });
 
     },
